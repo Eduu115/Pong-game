@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 705507994}
+  m_Sun: {fileID: 0}
   m_IndirectSpecularColor: {r: 0.18042892, g: 0.22588754, b: 0.30700472, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -143,11 +143,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 99874252040190625, guid: cb95af7f3d720694c9fe85f580acc3aa, type: 3}
   m_PrefabInstance: {fileID: 6379355854685833582}
-  m_PrefabAsset: {fileID: 0}
---- !u!108 &705507994 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 9019509479316221496, guid: f2152226d92320747aeeabcf565b64ad, type: 3}
-  m_PrefabInstance: {fileID: 6201008189865052931}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1311394047 stripped
 MonoBehaviour:
@@ -637,6 +632,18 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1315923879}
+    - target: {fileID: 6893122488449822996, guid: 3982032e91a5f8244bbd1304d48c41c6, type: 3}
+      propertyPath: spawnArea.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6893122488449822996, guid: 3982032e91a5f8244bbd1304d48c41c6, type: 3}
+      propertyPath: spawnArea.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6893122488449822996, guid: 3982032e91a5f8244bbd1304d48c41c6, type: 3}
+      propertyPath: spawnArea.z
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 6893122488449822996, guid: 3982032e91a5f8244bbd1304d48c41c6, type: 3}
       propertyPath: paddlePlayer
       value: 
