@@ -3,66 +3,84 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class BallController : MonoBehaviour
 {
-    public float initialSpeed = 18;
-    public float speedIncrementPerScore = 4;
+    [Header("Velocidades")]
+    public float initialSpeed = 18f;
+    public float speedIncrementPerScore = 2f;
     public float maxSpeed = 30f;
+    public float minPlaySpeed = 8f;
 
     private Rigidbody rb;
     private Vector3 lastVelocity;
     private float currentSpeed;
+    public bool isActive = false;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.useGravity = false;
         currentSpeed = initialSpeed;
     }
 
-    // IMPORTANTE: Comentamos OnEnable para que no lance automáticamente
-    // void OnEnable()
-    // {
-    //     Launch();
-    // }
-
     public void Launch(int direction = 0)
     {
-        // Aseguramos que la bola está parada antes de lanzar
         rb.velocity = Vector3.zero;
 
         int dir = (int)(direction != 0 ? Mathf.Sign(direction) : (Random.value < 0.5f ? -1 : 1));
-        // randomizamos el rebote (para que no sea recto y aburrido)
-        float y = Random.Range(-1.2f, 1.2f);
+        float yRange = 0.5f;
+        float y = Random.Range(-yRange, yRange);
+
         Vector3 v = new Vector3(dir, y, 0f).normalized * currentSpeed;
         rb.velocity = v;
-        // si no no me entero
+        isActive = true;
         Debug.Log($"Bola lanzada: velocidad={rb.velocity}, magnitud={rb.velocity.magnitude}");
     }
 
     void FixedUpdate()
     {
+        if (isActive)
+        {
+            float speed = rb.velocity.magnitude;
+            if (speed > 0.01f && speed < minPlaySpeed)
+            {
+                rb.velocity = rb.velocity.normalized * minPlaySpeed;
+            }
+        }
+
         lastVelocity = rb.velocity;
     }
 
     void OnCollisionEnter(Collision col)
     {
         Vector3 v = Vector3.Reflect(lastVelocity, col.contacts[0].normal);
-        rb.velocity = v.normalized * Mathf.Clamp(lastVelocity.magnitude, 8f, maxSpeed);
+        float speed = Mathf.Clamp(lastVelocity.magnitude, minPlaySpeed, maxSpeed);
+        rb.velocity = v.normalized * speed;
     }
 
     public void IncreaseSpeed(int round)
     {
-        currentSpeed = Mathf.Clamp(currentSpeed + round * speedIncrementPerScore, 0f, maxSpeed);
-        rb.velocity = rb.velocity.normalized * currentSpeed;
+        currentSpeed = Mathf.Clamp(initialSpeed + round * speedIncrementPerScore, 0f, maxSpeed);
+
+        if (rb.velocity.sqrMagnitude > 0.01f)
+        {
+            rb.velocity = rb.velocity.normalized * currentSpeed;
+        }
     }
 
     public void ResetSpeed()
     {
         currentSpeed = initialSpeed;
+
+        if (rb.velocity.sqrMagnitude > 0.01f)
+        {
+            rb.velocity = rb.velocity.normalized * currentSpeed;
+        }
     }
 
     public void Stop()
     {
+        isActive = false;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
