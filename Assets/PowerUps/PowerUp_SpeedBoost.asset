@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PowerUp_SpeedBoost
   m_EditorClassIdentifier: 
   powerUpName: Speed Boost
-  type: 5
+  type: 7
   duration: 4
   effectIntensity: 2
   glowColor: {r: 1, g: 1, b: 0, a: 1}

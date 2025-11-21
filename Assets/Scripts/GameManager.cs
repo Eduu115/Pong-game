@@ -228,9 +228,9 @@ public class GameManager : MonoBehaviour
         {
             // Forzamos que el Rigidbody se "despierte"
             ball.GetComponent<Rigidbody>().WakeUp();
-
-            // Lanzamos la bola
-            ball.Launch(direction);
         }
+
+        servingDirection = direction;
+        waitingForServe = true;
     }
 }
