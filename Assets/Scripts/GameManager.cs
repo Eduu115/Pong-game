@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Transform paddleAI;
     public TMP_Text scoreText;
     public TMP_Text winnerText;
+    public GameObject startScreen;   // ⬅ añadido desde GameManager.cs
 
     [Header("Configuración")]
     public int pointsToWin = 5;
@@ -25,13 +26,42 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // Iniciamos sin esperar saque (primera ronda se lanza automáticamente)
-        ResetRound(0);
+        // Empezamos PAUSADOS y con la pantalla de inicio visible (lógica tomada de GameManager.cs)
+        Time.timeScale = 0f;
+
+        scoreLeft = 0;
+        scoreRight = 0;
+        gameEnded = false;
+        waitingForServe = false;
+
+        // Reposicionamos todo pero NO lanzamos la bola todavía
+        RepositionEverything();
         UpdateScoreUI();
 
         if (winnerText) winnerText.gameObject.SetActive(false);
-        Time.timeScale = 1f;
+        if (startScreen) startScreen.SetActive(true);
     }
+
+    // ========= FUNCIÓN QUE USA EL BOTÓN START =========
+    public void StartGame()
+    {
+        Debug.Log("StartGame() llamado desde el botón");
+
+        if (startScreen) startScreen.SetActive(false);
+
+        Time.timeScale = 1f;
+
+        scoreLeft = 0;
+        scoreRight = 0;
+        gameEnded = false;
+        waitingForServe = false;
+
+        // Reseteamos velocidad de la bola y empezamos la ronda
+        if (ball) ball.ResetSpeed();
+        ResetRound(0);      // lanza la bola
+        UpdateScoreUI();
+    }
+    // ==================================================
 
     public void GoalScored(Goal.Side side)
     {
