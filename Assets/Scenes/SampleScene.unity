@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18042892, g: 0.22588754, b: 0.30700472, a: 1}
+  m_IndirectSpecularColor: {r: 0.18042937, g: 0.22588806, b: 0.30700582, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -182,6 +182,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fb09f3b980f87e47b516544281980ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1880974607 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2392086841240596592, guid: 53be2bb2f2a31d94bbe86a6a197d65f7, type: 3}
+  m_PrefabInstance: {fileID: 3700379916320765598}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1912561680 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1058611417092701197, guid: a86a0b90930c89341a3399cba4df4180, type: 3}
@@ -567,6 +572,14 @@ PrefabInstance:
     - target: {fileID: 2270754069127610019, guid: 53be2bb2f2a31d94bbe86a6a197d65f7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7049635132459223361, guid: 53be2bb2f2a31d94bbe86a6a197d65f7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1315923879}
+    - target: {fileID: 7049635132459223361, guid: 53be2bb2f2a31d94bbe86a6a197d65f7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartGame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1063,6 +1076,10 @@ PrefabInstance:
       propertyPath: winnerText
       value: 
       objectReference: {fileID: 1315065702}
+    - target: {fileID: 3090439204901231411, guid: 4893892893a1fc2448a942a0396dde3d, type: 3}
+      propertyPath: startScreen
+      value: 
+      objectReference: {fileID: 1880974607}
     - target: {fileID: 3090439204901231411, guid: 4893892893a1fc2448a942a0396dde3d, type: 3}
       propertyPath: paddlePlayer
       value: 
